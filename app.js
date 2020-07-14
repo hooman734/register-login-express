@@ -1,7 +1,27 @@
+// load dependencies
 const express = require('express'),
     path = require('path'),
     body = require('body-parser'),
-    session = require('express-session');
+    session = require('express-session'),
+    Sequelize = require('sequelize');
+
+
+
+// initialize sequelize with session store
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+
+// create db
+const sequelize = new Sequelize('Users', 'root', 'password', {
+    dialect: 'sqlite',
+    storage: './models/db/session.sqlite'
+});
+
+
+// setup session-store with the database
+const sessionStore = new SequelizeStore({
+    db: sequelize
+});
 
 
 // import routes
@@ -27,7 +47,14 @@ app.use(body.urlencoded({ extended: false }));
 
 
 // setup session
-app.use(session({secret: "hello world! from Hooman", resave: false, saveUninitialized: false}));
+app.use(session({secret: "hello world! from Hooman",
+    store: sessionStore,
+    resave: false,
+    saveUninitialized: false}));
+
+
+// create/sync db
+sessionStore.sync();
 
 
 // use routers
