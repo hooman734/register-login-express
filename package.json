@@ -1,0 +1,25 @@
+{
+  "name": "reg-log-exp",
+  "version": "1.0.0",
+  "description": "It is a practice of login, logout using session, cookie, and database.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "express",
+    "node"
+  ],
+  "author": "Hooman",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "engines": {
+	  "node":"14.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
