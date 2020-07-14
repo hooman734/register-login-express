@@ -6,8 +6,15 @@ block scripts
 
 block content
     .container-fluid.my-5
-        h1.text-muted.mx-5
-            em Welcome...
+        unless isLoggedIn
+            h1.text-muted.mx-5
+                em Welcome...
+
+        br
+
+        if isLoggedIn
+            h3.text-muted.mx-5
+                em You are Logged in successfully!
         
         br
 

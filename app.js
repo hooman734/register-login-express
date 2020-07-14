@@ -1,6 +1,7 @@
 const express = require('express'),
     path = require('path'),
-    body = require('body-parser');
+    body = require('body-parser'),
+    session = require('express-session');
 
 
 // import routes
@@ -25,12 +26,16 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(body.urlencoded({ extended: false }));
 
 
+// setup session
+app.use(session({secret: "hello world! from Hooman", resave: false, saveUninitialized: false}));
+
+
 // use routers
 app.use(routes);
 
 
 // default view
-app.use((_, res) => (res.render('./home/first_view')));
+app.use((req, res) => (res.render('./home/first_view', {isLoggedIn: req.session.isLoggedIn})));
 
 
 // listening the port
