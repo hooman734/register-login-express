@@ -3,9 +3,8 @@ const express = require('express'),
     body = require('body-parser');
 
 
-// import custom modules
-const register = require('./controllers/routes/register'),
-    retrieve = require('./controllers/routes/retrieve');
+// import routes
+const routes = require('./routes');
 
 
 // initialize & settings port
@@ -27,8 +26,7 @@ app.use(body.urlencoded({ extended: false }));
 
 
 // use routers
-app.use(register);
-app.use(retrieve);
+app.use(routes);
 
 
 // default view
