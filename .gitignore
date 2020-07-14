@@ -2,4 +2,5 @@
 # for register-login-express
 
 node_modules/
-
+.idea/
+watcherTasks.xml

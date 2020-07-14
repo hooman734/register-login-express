@@ -1,0 +1,21 @@
+extends ../share/layout.pug
+
+block scripts
+//-   script(src='/jquery.js')
+
+
+block content
+    .container-fluid.my-5
+        h1.text-muted.mx-5
+            em Welcome...
+        
+        br
+
+        form.pd-1.mx-5(method='GET', action='/api/register')
+ 
+            button.btn.btn-outline-primary.btn-lg.btn-block To register please - Sign Up!
+
+        form.pd-1.mx-5(method='GET', action='/api/login')
+            
+            button.btn.btn-outline-success.btn-lg.btn-block To login please - Sign In!
+
