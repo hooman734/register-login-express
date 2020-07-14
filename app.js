@@ -15,7 +15,7 @@ port = process.env.PORT || 4444;
 
 // setup view engine
 app.set('view engine', 'pug');
-app.set('views', 'views/home');
+app.set('views', 'views');
 
 
 // set static folder
@@ -32,7 +32,7 @@ app.use(retrieve);
 
 
 // default view
-app.use((_, res) => (res.render('first_view')));
+app.use((_, res) => (res.render('./home/first_view')));
 
 
 // listening the port

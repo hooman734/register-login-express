@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/api/register', (req, res, next) => {
-    res.render('register');
-});
+// import logic
+const _ = require('../logics/register');
 
-router.post('/api/register', (req, res, next) => {
-    res.send(req.body);
-});
+
+router.get('/api/register', _.fillOut);
+
+router.post('/api/register', _.register);
 
 module.exports = router;
