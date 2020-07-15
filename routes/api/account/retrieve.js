@@ -24,9 +24,16 @@ exports.loggedIn = (req, res, next) => {
             req.session.isLoggedIn = true;
             res.render('./home/welcome', {isLoggedIn: req.session.isLoggedIn, userName: req.session.userName})
         } else {
+            req.session.isLoggedIn = false;
             res.redirect('/');
         }
     }).then();
-
     // res.send(req.body);
+}
+
+
+// when method is GET
+exports.loggedOut = (req, res, next) => {
+    req.session.destroyed;
+    res.render('./home/first_view');
 }

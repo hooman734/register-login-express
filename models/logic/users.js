@@ -5,7 +5,7 @@ const { Sequelize, Model, DataTypes } = require('sequelize');
 // create db
 const sequelize = new Sequelize('Users', 'root', 'password', {
     dialect: 'sqlite',
-    storage: '../../models/db/users.sqlite'
+    storage: '../db/users.sqlite'
 });
 
 

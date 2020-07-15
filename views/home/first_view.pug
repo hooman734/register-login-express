@@ -19,14 +19,21 @@ block content
             h3.text-muted.mx-5
                 em Logged in as -
                 strong.badge.badge-pill.badge-dark #{userName}
+
+            form.pd-1.mx-5(method='GET', action='/api/logout')
+
+                button.btn.btn-outline-danger.btn-lg.mx-5.px-5 Sign Out!
+
+        else
         
-        br
+            br
 
-        form.pd-1.mx-5(method='GET', action='/api/register')
- 
-            button.btn.btn-outline-primary.btn-lg.btn-block To register please - Sign Up!
+            form.pd-1.mx-5(method='GET', action='/api/register')
 
-        form.pd-1.mx-5(method='GET', action='/api/login')
-            
-            button.btn.btn-outline-success.btn-lg.btn-block To login please - Sign In!
+                button.btn.btn-outline-primary.btn-lg.mx-5.px-5 Sign Up!
+
+            form.pd-1.mx-5(method='GET', action='/api/login')
+
+                button.btn.btn-outline-success.btn-lg.mx-5.px-5 Sign In!
+
 
