@@ -12,7 +12,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 
 // create db
-const sequelize = new Sequelize('Users', 'root', 'password', {
+const sequelize = new Sequelize('Info', 'root', 'password', {
     dialect: 'sqlite',
     storage: './models/db/session.sqlite'
 });
