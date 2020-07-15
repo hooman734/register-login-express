@@ -34,6 +34,8 @@ exports.loggedIn = (req, res, next) => {
 
 // when method is GET
 exports.loggedOut = (req, res, next) => {
+    req.session.isLoggedIn = false;
+    req.session.isRegistered = false;
     req.session.destroyed;
     res.render('./home/first_view');
 }
