@@ -1,3 +1,4 @@
+// load dependencies
 const { Sequelize, Model, DataTypes } = require('sequelize');
 
 
@@ -18,7 +19,7 @@ User.init({
 
 
 // push new record
-const push = async (userName, userEmail, password) => {
+exports.push = async (userName, userEmail, password) => {
     await sequelize.sync();
     await User.create({
         userName,
@@ -29,21 +30,23 @@ const push = async (userName, userEmail, password) => {
 
 
 // retrieve a record
-const query = async (password) => {
-    // await sequelize.sync();
-    let d = await User.findOne({
-        where: {
-            password
-        }
-    }, user => {
-        return user.toJSON()
-    });
-
-    console.log('---->', d);
-    return d;
+exports.query = async (password, callback, error) => {
+    await sequelize.sync();
+    try {
+        let d = await User.findOne({
+            where: {
+                password
+            }
+        });
+        callback(d.toJSON());
+        error(false);
+    } catch (e) {
+        callback({userName: 'NULL', userEmail: 'NULL', password: 'NULL'});
+        error(true);
+    }
 };
 
 
-
-push("Hooman", "hooman@gmail.com", "haha");
-console.log('<----------', query("haha"));
+// test functions
+// push("Hooman", "hooman@gmail.com", "hahaa");
+// query("hahaa", (user) => (console.log("userEmail =>", user.userEmail)), (e) => (console.log('error => ', e)));

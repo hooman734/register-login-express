@@ -12,9 +12,13 @@ block content
 
         br
 
+        if isRegistered && !isLoggedIn
+            h5.text-muted.mx-5 Already registered user
+
         if isLoggedIn
             h3.text-muted.mx-5
-                em You are Logged in successfully!
+                em Logged in as -
+                strong.badge.badge-pill.badge-dark #{userName}
         
         br
 

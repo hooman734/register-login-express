@@ -21,6 +21,7 @@
     "connect-session-sequelize": "^7.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "object-hash": "^2.0.3",
     "pug": "^3.0.0",
     "sequelize": "^6.3.3",
     "sqlite3": "^5.0.0"
