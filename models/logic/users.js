@@ -49,5 +49,5 @@ exports.query = async (password, callback, error) => {
 
 
 // test functions
-push("Hooman", "hooman@gmail.com", "hahaa");
-query("hahaa", (user) => (console.log("userEmail =>", user.userEmail)), (e) => (console.log('error => ', e)));
+// push("Hooman", "hooman@gmail.com", "hahaa");
+// query("hahaa", (user) => (console.log("userEmail =>", user.userEmail)), (e) => (console.log('error => ', e)));
