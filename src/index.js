@@ -3,6 +3,7 @@ import express from 'express';
 import body from 'body-parser';
 import session from 'express-session';
 import Sequelize from 'sequelize';
+import { init } from './models/logic/users';
 
 // initialize sequelize with session store
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -19,7 +20,12 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
-    logging: true,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   });
 }
 
@@ -57,6 +63,7 @@ app.use(
 
 // create/sync db
 sessionStore.sync();
+init(sequelize);
 
 // use routers
 app.use(routes);
@@ -67,6 +74,11 @@ app.use((req, res) => res.render('./home/index', {
   isLoggedIn: req.session.isLoggedIn,
   userName: req.session.userName,
 }));
+
+app.use((req, res, next) => {
+  req.sequelize = sequelize;
+  next();
+});
 
 // listening the port
 app.listen(port, () => console.log(`Listening on port ${port} ...`));

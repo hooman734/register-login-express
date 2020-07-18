@@ -7,3 +7,4 @@ watcherTasks.xml
 /src/index-compiled.js
 build
 *.sqlite
+.env
