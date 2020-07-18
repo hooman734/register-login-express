@@ -1,4 +1,5 @@
 module.exports = {
+  ignorePatterns: ['build/*'],
   env: {
     browser: true,
     es2020: true,
@@ -11,5 +12,6 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'no-console': 0,
   },
 };
