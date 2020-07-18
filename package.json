@@ -4,8 +4,9 @@
   "description": "It is a practice of login, logout using session, cookie, and database.",
   "main": "app.js",
   "scripts": {
+    "lint": "eslint src/ --ext .js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "mkdir -p build && cp -r src/* build && babel src/** -d build",
+    "build": "rm -rf build || true && mkdir -p build && cp -r src/* build && babel src/** -d build",
     "dev": "NODE_ENV=development nodemon --exec babel-node src/index.js",
     "postinstall": "NODE_ENV=production npm run build && node build/index.js"
   },
@@ -37,6 +38,9 @@
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "7.4.2",
     "@babel/register": "7.4.0",
+    "eslint": "^7.5.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
     "nodemon": "^2.0.4"
   }
 }

@@ -63,7 +63,7 @@ app.use(routes);
 
 // default view
 app.use((req, res) =>
-  res.render("./home/first_view", {
+  res.render("home/index", {
     isRegistered: req.session.isRegistered,
     isLoggedIn: req.session.isLoggedIn,
     userName: req.session.userName,
