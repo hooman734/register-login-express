@@ -40,7 +40,7 @@ app.set("view engine", "pug");
 app.set("views", "views");
 
 // set static folder
-app.use(express.static(path.resolve(__dirname, "public")));
+app.use(express.static("public"));
 
 // setup body-parser
 app.use(body.urlencoded({ extended: false }));
