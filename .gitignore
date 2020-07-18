@@ -4,3 +4,6 @@
 node_modules/
 .idea/
 watcherTasks.xml
+/src/index-compiled.js
+build
+*.sqlite

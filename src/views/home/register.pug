@@ -1,4 +1,4 @@
-extends ../share/layout.pug
+extends ../share/layout
 
 block scripts
 //-   script(src='/jquery.js')
@@ -6,10 +6,10 @@ block scripts
 
 block content
     .container-fluid.mt-3
-        form.form-signin(method='POST', action='/api/login')
+        form.form-signin(method='POST', action='/api/register')
             .text-center.mb-4
-                h1.h3.mb-3.font-weight-normal Sign-in!
-                p Insert your information to sign-in!
+                h1.h3.mb-3.font-weight-normal Sign-up!
+                p Insert your information to sign-up!
                 br
 
             .px-5
@@ -24,8 +24,13 @@ block content
                     .col-sm-4
                         input.form-control(type="password", id="inputPassword", name='pass', placeholder="Password")
                     
+                br
+                .form-label-group
+                    label.col-sm-6(for="inputConfPassword") Confirm password
+                    .col-sm-4
+                        input.form-control(type="password", id="inputConfPassword", name='rePass', placeholder="Again password")
                     
                 br
                 .col-sm-4
-                    button.btn.btn-lg.btn-secondary.btn-block(type='submit') Sign In!
+                    button.btn.btn-lg.btn-secondary.btn-block(type='submit') Register!
                     p.mt-5.mb-3.text-muted.text-center AMIR - VIHAN 2020
