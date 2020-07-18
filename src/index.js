@@ -19,6 +19,7 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
+    logging: true,
   });
 }
 
