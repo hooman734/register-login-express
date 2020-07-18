@@ -7,7 +7,7 @@
     "lint": "eslint src/ --ext .js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf build || true && mkdir -p build && cp -r src/* build && babel src/** -d build",
-    "dev": "NODE_ENV=development nodemon --exec babel-node src/index.js",
+    "dev": "cd src && NODE_ENV=development nodemon --exec babel-node index.js",
     "postinstall": "NODE_ENV=production npm run build && node build/index.js"
   },
   "keywords": [
