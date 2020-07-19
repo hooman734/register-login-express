@@ -1,20 +1,18 @@
 // load dependency
-const hash = require('object-hash');
-
+import hash from 'object-hash';
 
 // load model logic helper
-const {push, query} = require('../../../models/logic/users');
-
+import { push, query } from '../../../models/logic/users';
 
 // when method is GET
-exports.signIn = (req, res, next) => {
+export function signIn(req, res, next) {
     res.render('./home/signIn');
 }
 
 
 // when method is POST
-exports.loggedIn = (req, res, next) => {
-    let {email, pass} = req.body;
+export function loggedIn(req, res, next) {
+    let { email, pass } = req.body;
     pass = hash(pass + email);
     query(pass, (usr) => {
         req.session.userName = usr.userName;
@@ -22,7 +20,7 @@ exports.loggedIn = (req, res, next) => {
     }, (e) => {
         if (!e) {
             req.session.isLoggedIn = true;
-            res.render('./home/welcome', {isLoggedIn: req.session.isLoggedIn, userName: req.session.userName})
+            res.render('./home/welcome', { isLoggedIn: req.session.isLoggedIn, userName: req.session.userName })
         } else {
             req.session.isLoggedIn = false;
             res.redirect('/');
@@ -33,7 +31,7 @@ exports.loggedIn = (req, res, next) => {
 
 
 // when method is GET
-exports.loggedOut = (req, res, next) => {
+export function loggedOut(req, res, next) {
     req.session.isLoggedIn = false;
     req.session.isRegistered = false;
     req.session.destroyed;

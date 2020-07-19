@@ -3,6 +3,7 @@ const router = express.Router();
 
 // import api/account
 const {signUp, register} = require('./api/account/register');
+
 const {signIn, loggedIn, loggedOut} = require('./api/account/retrieve');
 
 

@@ -1,28 +1,34 @@
+import { salt } from '../../../constants';
+
 // load dependency
-const { sha3 } = require('sha3');
+import { SHA3 } from 'sha3';
 
 // load model logic helper
-const { push, query } = require('../../../models/logic/users');
+import { push, query } from '../../../models/logic/users';
+
+const hash = new SHA3(256);
 
 // when method is GET
-exports.signUp = (req, res) => {
+export function signUp(req, res) {
   res.render('./home/register');
-};
+}
 
 // when method is POST
-exports.register = (req, res) => {
+export function register(req, res) {
   const { sequelize } = req;
 
   let { email, pass, rePass } = req.body;
-  if (pass === rePass) {
-    req.session.isRegistered = true;
-    sha3.update(pass);
-    pass = sha3.digest();
-    push(userName, email, pass).then();
-    res.redirect('/');
-  } else {
-    res.redirect('/');
-  }
 
-  // res.send(req.body);
-};
+  if (pass !== rePass) {
+    // password confirmation did not match
+    // TODO: send an error
+  }
+  //
+  // req.session.isRegistered = true;
+
+  hash.update(`${pass}${salt}`);
+  const hashedPassword = hash.digest('hex');
+
+  push(email, email, hashedPassword).then();
+  res.redirect('/');
+}
