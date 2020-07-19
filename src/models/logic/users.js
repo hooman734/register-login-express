@@ -24,11 +24,11 @@ exports.query = async (sequelize, password, callback, error) => {
         password,
       },
     });
-    callback(d.toJSON());
-    error(false);
+    await callback(d.toJSON());
+    await error(false);
   } catch (e) {
-    callback({ userName: 'NULL', userEmail: 'NULL', password: 'NULL' });
-    error(true);
+    await callback({ userName: 'NULL', userEmail: 'NULL', password: 'NULL' });
+    await error(true);
   }
 };
 

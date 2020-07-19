@@ -4,7 +4,7 @@ import { salt } from '../../../constants';
 import { SHA3 } from 'sha3';
 
 // load model logic helper
-import { push, query } from '../../../models/logic/users';
+import { push } from '../../../models/logic/users';
 
 const hash = new SHA3(256);
 
@@ -29,6 +29,6 @@ export function register(req, res) {
   hash.update(`${pass}${salt}`);
   const hashedPassword = hash.digest('hex');
 
-  push(email, email, hashedPassword).then();
+  push(sequelize, email, email, hashedPassword);
   res.redirect('/');
 }

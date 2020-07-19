@@ -1,39 +1,41 @@
 // load dependency
-import hash from 'object-hash';
+import { SHA3 } from 'sha3';
 
 // load model logic helper
-import { push, query } from '../../../models/logic/users';
+import { query } from '../../../models/logic/users';
+import { salt } from '../../../constants';
 
+const hash = new SHA3(256);
 // when method is GET
-export function signIn(req, res, next) {
-    res.render('./home/signIn');
+export function signIn(req, res) {
+  res.render('./home/signIn');
 }
-
 
 // when method is POST
-export function loggedIn(req, res, next) {
-    let { email, pass } = req.body;
-    pass = hash(pass + email);
-    query(pass, (usr) => {
-        req.session.userName = usr.userName;
-        console.log('Welcome ', usr.userName);
-    }, (e) => {
-        if (!e) {
-            req.session.isLoggedIn = true;
-            res.render('./home/welcome', { isLoggedIn: req.session.isLoggedIn, userName: req.session.userName })
-        } else {
-            req.session.isLoggedIn = false;
-            res.redirect('/');
-        }
-    }).then();
-    // res.send(req.body);
+export function loggedIn(req, res) {
+  const { sequelize } = req;
+  const { pass } = req.body;
+  hash.update(`${pass}${salt}`);
+  const hashedPassword = hash.digest('hex');
+  query(sequelize, hashedPassword, (usr) => {
+    req.session.userName = usr.userName;
+    console.log('Welcome ', usr.userName);
+  }, (e) => {
+    if (!e) {
+      req.session.isLoggedIn = true;
+      res.render('./home/welcome', { isLoggedIn: req.session.isLoggedIn, userName: req.session.userName });
+    } else {
+      req.session.isLoggedIn = false;
+      res.redirect('/');
+    }
+  }).then();
+  // res.send(req.body);
 }
 
-
 // when method is GET
-export function loggedOut(req, res, next) {
-    req.session.isLoggedIn = false;
-    req.session.isRegistered = false;
-    req.session.destroyed;
-    res.render('./home/first_view');
+export function loggedOut(req, res) {
+  req.session.isLoggedIn = false;
+  req.session.isRegistered = false;
+  req.session.destroyed;
+  res.render('./home/first_view');
 }
