@@ -83,4 +83,4 @@ app.use((req, res, next) => {
 });
 
 // listening the port
-app.listen(port, () => console.log(`Listening on port ${port} ...`));
+app.listen(port, () => console.log(`Serving on http://localhost:${port}`));

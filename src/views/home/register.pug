@@ -17,19 +17,19 @@ block content
                     label.col-sm-6(for="inputEmail") Email address
                     .col-sm-4
                         input.form-control(type="email", id="inputEmail", name='email', placeholder="Email address")
-                    
+
                 br
                 .form-label-group
                     label.col-sm-6(for="inputPassword") Password
                     .col-sm-4
-                        input.form-control(type="password", id="inputPassword", name='pass', placeholder="Password")
-                    
+                        input.form-control(type="password", id="inputPassword", name='pass', placeholder="Password", required='true')
+
                 br
                 .form-label-group
                     label.col-sm-6(for="inputConfPassword") Confirm password
                     .col-sm-4
-                        input.form-control(type="password", id="inputConfPassword", name='rePass', placeholder="Again password")
-                    
+                        input.form-control(type="password", id="inputConfPassword", name='rePass', placeholder="Confirm password", required='true')
+
                 br
                 .col-sm-4
                     button.btn.btn-lg.btn-secondary.btn-block(type='submit') Register!
