@@ -17,18 +17,22 @@ export function loggedIn(req, res) {
   const { pass } = req.body;
   hash.update(`${pass}${salt}`);
   const hashedPassword = hash.digest('hex');
-  query(sequelize, hashedPassword, (usr) => {
-    req.session.userName = usr.userName;
-    console.log('Welcome ', usr.userName);
-  }, (e) => {
-    if (!e) {
-      req.session.isLoggedIn = true;
-      res.render('./home/welcome', { isLoggedIn: req.session.isLoggedIn, userName: req.session.userName });
-    } else {
-      req.session.isLoggedIn = false;
-      res.redirect('/');
-    }
-  }).then();
+  try {
+    query(sequelize, hashedPassword, (usr) => {
+      req.session.userName = usr.userName;
+      console.log('Welcome ', usr.userName);
+    }, (e) => {
+      if (!e) {
+        req.session.isLoggedIn = true;
+        res.render('./home/welcome', { isLoggedIn: req.session.isLoggedIn, userName: req.session.userName });
+      } else {
+        req.session.isLoggedIn = false;
+        res.redirect('/');
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
   // res.send(req.body);
 }
 

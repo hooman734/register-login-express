@@ -7,12 +7,16 @@ class User extends Model {}
 // push new record
 exports.push = async (sequelize, userName, userEmail, password) => {
   await sequelize.sync({ force: true });
-  await User.create({
-    userName,
-    userEmail,
-    password,
-  });
-  await sequelize.sync();
+  try {
+    await User.create({
+      userName,
+      userEmail,
+      password,
+    });
+    await sequelize.sync();
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 // retrieve a record
@@ -26,7 +30,7 @@ exports.query = async (sequelize, password, callback, error) => {
     });
     await callback(d.toJSON());
     await error(false);
-  } catch (e) {
+  } catch (err) {
     await callback({ userName: 'NULL', userEmail: 'NULL', password: 'NULL' });
     await error(true);
   }

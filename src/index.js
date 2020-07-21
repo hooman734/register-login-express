@@ -65,7 +65,7 @@ app.use(
 sessionStore.sync();
 init(sequelize);
 
-// sequelize.sync({ force: true });
+sequelize.sync({ force: true });
 
 // use routers
 app.use(routes);
