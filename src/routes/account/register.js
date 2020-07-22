@@ -13,10 +13,12 @@ export const handleRegisterPost = async (req, res) => {
     return res.render('account/register', { error: 'password and password confirmation do not match' });
   }
 
-  const service = new AccountLogic(sequelize);
+  if (!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(password)) {
+    logger.error('passwords did not comply the rule');
+    return res.render('account/register', { error: 'password must be composed of both upper and lower case letter, number, and special letter with length at least 8' });
+  }
 
-  // TODO
-  // /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+  const service = new AccountLogic(sequelize);
 
   try {
     await service.register(email, password);

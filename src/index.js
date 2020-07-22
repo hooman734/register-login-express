@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'development') {
   sequelize = new Sequelize('Info', 'root', 'password', {
     dialect: 'sqlite',
     storage: 'db/db.sqlite',
-    logging: true,
+    logging: false,
   });
 } else {
   sequelize = new Sequelize(process.env.DATABASE_URL, {
@@ -97,10 +97,6 @@ const ensureLoggedIn = (req, res, next) => {
   return res.redirect('/');
 };
 
-// TODO: log every route with a middleware
-// log before going to the route
-// call next()
-// log after going to the route
 app.use((req, res, next) => {
   const { logger: l } = req;
 
