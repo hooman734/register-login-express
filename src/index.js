@@ -101,7 +101,13 @@ const ensureLoggedIn = (req, res, next) => {
 // log before going to the route
 // call next()
 // log after going to the route
-app.use((req, res, next) => { });
+app.use((req, res, next) => {
+  const { logger: l } = req;
+
+  l.trace('Before the request');
+  next();
+  l.trace('After the request');
+});
 
 // default view
 app.get('/', (req, res) => {
