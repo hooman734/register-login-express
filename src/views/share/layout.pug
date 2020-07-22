@@ -1,23 +1,27 @@
 html
   head
-    title = Register & Login Practice    -    by Hooman
+    title
+      | Register & Login Practice - by Hooman
     link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css", integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk", crossorigin="anonymous")
     block scripts
-        
 
   body
     nav.navbar.navbar-light(style='background-color: #e3f2fd;')
       span.navbar-text.
         This is just a test website to practice login, logout, using cookie, session, and database
-              -      Developped by By :
-      
+              - Developed by By :
+
       a.navbar-brand(href='http://hooman.hesamian.com', style='color: green;') .: Hooman Hesamyan :.
 
-      
       a.btn.btn-outline-info.my-2.my-sm-0(href='/') Go back home!
 
+  if message
+    div.alert.alert-success
+      | #{message}
+
+  if error
+    div.alert.alert-danger
+      | #{error}
+
     block content
-    //- block foot
-    //-   #footer
-    //-     p some footer content
 

@@ -1,12 +1,10 @@
 extends ../share/layout
 
 block scripts
-//-   script(src='/jquery.js')
-
 
 block content
     .container-fluid.mt-3
-        form.form-signin(method='POST', action='/api/login')
+        form.form-signin(method='POST', action='/login')
             .text-center.mb-4
                 h1.h3.mb-3.font-weight-normal Sign-in!
                 p Insert your information to sign-in!
@@ -22,8 +20,7 @@ block content
                 .form-label-group
                     label.col-sm-6(for="inputPassword") Password
                     .col-sm-4
-                        input.form-control(type="password", id="inputPassword", name='pass', placeholder="Password", required='true')
-
+                        input.form-control(type="password", id="inputPassword", name='password', placeholder="Password", required='true')
 
                 br
                 .col-sm-4

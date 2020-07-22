@@ -1,12 +1,10 @@
 extends ../share/layout
 
 block scripts
-//-   script(src='/jquery.js')
-
 
 block content
     .container-fluid.mt-3
-        form.form-signin(method='POST', action='/api/register')
+        form.form-signin(method='POST', action='/register')
             .text-center.mb-4
                 h1.h3.mb-3.font-weight-normal Sign-up!
                 p Insert your information to sign-up!
@@ -22,13 +20,13 @@ block content
                 .form-label-group
                     label.col-sm-6(for="inputPassword") Password
                     .col-sm-4
-                        input.form-control(type="password", id="inputPassword", name='pass', placeholder="Password", required='true')
+                        input.form-control(type="password", id="inputPassword", name='password', placeholder="Password", required='true')
 
                 br
                 .form-label-group
                     label.col-sm-6(for="inputConfPassword") Confirm password
                     .col-sm-4
-                        input.form-control(type="password", id="inputConfPassword", name='rePass', placeholder="Confirm password", required='true')
+                        input.form-control(type="password", id="inputConfPassword", name='passwordConfirmation', placeholder="Confirm password", required='true')
 
                 br
                 .col-sm-4

@@ -1,20 +1,17 @@
-const express = require('express');
+import express from 'express';
+// import api/account
+import { handleRegisterGet, handleRegisterPost } from './account/register';
+import { handleLoginGet, handleLoginPost } from './account/login';
+import { handleLogoutGet } from './account/logout';
+
 const router = express.Router();
 
-// import api/account
-const {signUp, register} = require('./api/account/register');
+router.get('/register', handleRegisterGet);
+router.post('/register', handleRegisterPost);
 
-const {signIn, loggedIn, loggedOut} = require('./api/account/retrieve');
+router.get('/login', handleLoginGet);
+router.post('/login', handleLoginPost);
 
+router.get('/logout', handleLogoutGet);
 
-router.get('/api/register', signUp);
-
-router.post('/api/register', register);
-
-router.get('/api/login', signIn);
-
-router.post('/api/login', loggedIn);
-
-router.get('/api/logout', loggedOut);
-
-module.exports = router;
+export default router;

@@ -3,7 +3,12 @@ import express from 'express';
 import body from 'body-parser';
 import session from 'express-session';
 import Sequelize from 'sequelize';
-import { init } from './models/logic/users';
+import ulog from 'ulog';
+
+import routes from './routes';
+
+// Initialize a logger instance
+const logger = ulog('application-logger');
 
 // initialize sequelize with session store
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -14,7 +19,7 @@ let sequelize;
 if (process.env.NODE_ENV === 'development') {
   sequelize = new Sequelize('Info', 'root', 'password', {
     dialect: 'sqlite',
-    storage: './models/db/session.sqlite',
+    storage: 'db/session.sqlite',
     logging: true,
   });
 } else {
@@ -33,10 +38,6 @@ if (process.env.NODE_ENV === 'development') {
 const sessionStore = new SequelizeStore({
   db: sequelize,
 });
-
-// import routes
-const routes = require('./routes');
-
 // initialize & settings port
 const app = express();
 const port = process.env.PORT || 3000;
@@ -63,24 +64,43 @@ app.use(
 
 // create/sync db
 sessionStore.sync();
-init(sequelize);
 
 sequelize.sync({ force: true });
 
-// use routers
-app.use(routes);
-
-// default view
-app.use((req, res) => res.render('./home/index', {
-  isRegistered: req.session.isRegistered,
-  isLoggedIn: req.session.isLoggedIn,
-  userName: req.session.userName,
-}));
-
+// Middleware
 app.use((req, res, next) => {
   req.sequelize = sequelize;
+  req.logger = logger;
   next();
 });
+
+// use routers
+app.use('/', routes);
+
+/**
+ * Guard that makes sure user is logged in before continuing further
+ * @param req
+ * @param res
+ * @param next
+ * @returns {*}
+ */
+const ensureLoggedIn = (req, res, next) => {
+  const { isLoggedIn } = req.session;
+
+  if (isLoggedIn) {
+    return next();
+  }
+  return res.redirect('/');
+};
+
+// default view
+app.get('/', (req, res) => {
+  const { user: { email } = {}, isLoggedIn } = req.session;
+
+  return res.render('index', { email, isLoggedIn });
+});
+
+app.get('/welcome', ensureLoggedIn, (req, res) => res.render('welcome'));
 
 // listening the port
 app.listen(port, () => console.log(`Serving on http://localhost:${port}`));
