@@ -4,15 +4,17 @@ import body from 'body-parser';
 import session from 'express-session';
 import Sequelize from 'sequelize';
 import ulog from 'ulog';
+import connectSessionSequelize from 'connect-session-sequelize';
 
 import routes from './routes';
 import { init } from './dal/user.dal';
 
 // Initialize a logger instance
+
 const logger = ulog('application-logger');
 
 // initialize sequelize with session store
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const SequelizeStore = connectSessionSequelize(session.Store);
 
 // create db
 let sequelize;
