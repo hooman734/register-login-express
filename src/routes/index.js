@@ -6,6 +6,8 @@ import { handleLogoutGet } from './account/logout';
 
 const router = express.Router();
 
+// TODO
+
 router.get('/register', handleRegisterGet);
 router.post('/register', handleRegisterPost);
 

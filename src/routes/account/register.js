@@ -15,6 +15,9 @@ export const handleRegisterPost = async (req, res) => {
 
   const service = new AccountLogic(sequelize);
 
+  // TODO
+  // /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+
   try {
     await service.register(email, password);
 
