@@ -12,7 +12,9 @@ export const handleLoginPost = async (req, res) => {
   const service = new AccountLogic(sequelize);
 
   try {
-    req.session.user = await service.login(email, password);
+    const { dataValues: user } = await service.login(email, password);
+
+    req.session.user = user;
     req.session.isLoggedIn = true;
 
     return res.redirect('/welcome');

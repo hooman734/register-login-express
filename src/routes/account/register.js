@@ -19,7 +19,7 @@ export const handleRegisterPost = async (req, res) => {
     await service.register(email, password);
 
     req.session.user = { email };
-    return res.redirect('/login');
+    return res.render('account/register', { message: 'successfully registered' });
   } catch (e) {
     logger.error(e.message);
     return res.render('account/register', { error: 'something went wrong while saving the user' });

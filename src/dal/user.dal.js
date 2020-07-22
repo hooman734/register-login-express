@@ -55,7 +55,7 @@ export const existUserWithEmail = async (sequelize, email) => (await User.count(
 
 export const init = (sequelize) => {
   User.init({
-    username: DataTypes.STRING,
+    email: DataTypes.STRING,
     password: DataTypes.STRING,
   }, { sequelize, modelName: 'user' });
 };

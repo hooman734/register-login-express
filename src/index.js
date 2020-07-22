@@ -6,6 +6,7 @@ import Sequelize from 'sequelize';
 import ulog from 'ulog';
 
 import routes from './routes';
+import { init } from './dal/user.dal';
 
 // Initialize a logger instance
 const logger = ulog('application-logger');
@@ -19,7 +20,7 @@ let sequelize;
 if (process.env.NODE_ENV === 'development') {
   sequelize = new Sequelize('Info', 'root', 'password', {
     dialect: 'sqlite',
-    storage: 'db/session.sqlite',
+    storage: 'db/db.sqlite',
     logging: true,
   });
 } else {
@@ -64,8 +65,9 @@ app.use(
 
 // create/sync db
 sessionStore.sync();
+init(sequelize);
 
-sequelize.sync({ force: true });
+sequelize.sync({ force: false });
 
 // Middleware
 app.use((req, res, next) => {
@@ -95,12 +97,16 @@ const ensureLoggedIn = (req, res, next) => {
 
 // default view
 app.get('/', (req, res) => {
-  const { user: { email } = {}, isLoggedIn } = req.session;
+  const { user: { email = '' } = {}, isLoggedIn = false } = req.session;
 
   return res.render('index', { email, isLoggedIn });
 });
 
-app.get('/welcome', ensureLoggedIn, (req, res) => res.render('welcome'));
+app.get('/welcome', [ensureLoggedIn], (req, res) => {
+  const { user: { email = '' } = {} } = req.session;
+
+  return res.render('welcome', { email });
+});
 
 // listening the port
 app.listen(port, () => console.log(`Serving on http://localhost:${port}`));

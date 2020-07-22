@@ -4,18 +4,10 @@ block scripts
 
 block content
     .container-fluid.my-5
-        unless isLoggedIn
-            h1.text-muted.mx-5
-                em Welcome...
-        br
-
-        if isRegistered && !isLoggedIn
-            h5.text-muted.mx-5 Registered Successfully!
-
         if isLoggedIn
             h3.text-muted.mx-5
                 em Logged in as -
-                strong.badge.badge-pill.badge-dark #{userName}
+                strong.badge.badge-pill.badge-dark #{email}
 
             form.pd-1.mx-5(method='GET', action='/logout')
                 button.btn.btn-outline-danger.btn-lg.mx-5.px-5 Sign Out!

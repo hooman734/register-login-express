@@ -15,10 +15,15 @@ export class AccountLogic {
   }
 
   async login(email, password) {
-    await findUser(this.sequelize, {
+    const result = await findUser(this.sequelize, {
       email,
       password: hashPassword(password),
     });
+
+    if (result) {
+      return result;
+    }
+    throw new Error('Failed to findOne');
   }
 
   async register(email, password) {

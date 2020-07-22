@@ -16,12 +16,12 @@ html
       a.btn.btn-outline-info.my-2.my-sm-0(href='/') Go back home!
 
   if message
-    div.alert.alert-success
+    div.alert.alert-info
       | #{message}
 
   if error
     div.alert.alert-danger
       | #{error}
 
-    block content
+  block content
 
