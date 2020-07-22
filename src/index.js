@@ -95,7 +95,7 @@ const ensureLoggedIn = (req, res, next) => {
   return res.redirect('/');
 };
 
-// TOOD: log every route with a middleware
+// TODO: log every route with a middleware
 // log before going to the route
 // call next()
 // log after going to the route
