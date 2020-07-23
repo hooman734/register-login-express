@@ -17,7 +17,7 @@ export class AccountLogic {
   async login(email, password) {
     
     if (!email) {
-      throw new Error('Mail field is undefined!");
+      throw new Error('Email field is undefined!");
     }
 
     if (!password) {
@@ -38,7 +38,7 @@ export class AccountLogic {
   async register(email, password) {
 
     if (!email) {
-      throw new Error('Mail field is undefined!");
+      throw new Error('Email field is undefined!");
     }
 
     if (!password) {
