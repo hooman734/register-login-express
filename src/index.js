@@ -28,6 +28,7 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
+    logging: true,
     dialectOptions: {
       ssl: {
         require: true,
@@ -98,11 +99,11 @@ const ensureLoggedIn = (req, res, next) => {
 };
 
 app.use((req, res, next) => {
-  const { logger: l } = req;
+  const { logger: l, protocol, originalUrl } = req;
 
-  l.trace('Before the request');
+  l.trace(`Before the request: ${protocol}://${req.get('host')}${originalUrl}`);
   next();
-  l.trace('After the request');
+  l.trace(`After the request: ${protocol}://${req.get('host')}${originalUrl}`);
 });
 
 // default view
