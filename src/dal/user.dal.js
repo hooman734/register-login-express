@@ -30,6 +30,7 @@ export const addUser = async (sequelize, { email, password }) => {
  */
 export const findUser = async (sequelize, { email, password }) => {
   try {
+    await sequelize.sync();
     return await User.findOne({
       where: {
         email,
