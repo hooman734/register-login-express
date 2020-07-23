@@ -17,11 +17,11 @@ export class AccountLogic {
   async login(email, password) {
     
     if (!email) {
-      throw new Error('Email field is undefined!");
+      throw new Error('Email field is undefined!');
     }
 
     if (!password) {
-      throw new Error('Password field is undefined!");
+      throw new Error('Password field is undefined!');
     }
 
     const result = await findUser(this.sequelize, {
@@ -38,11 +38,11 @@ export class AccountLogic {
   async register(email, password) {
 
     if (!email) {
-      throw new Error('Email field is undefined!");
+      throw new Error('Email field is undefined!');
     }
 
     if (!password) {
-      throw new Error('Password field is undefined!");
+      throw new Error('Password field is undefined!');
     }
 
     const emailAlreadyExist = await existUserWithEmail(this.sequelize, email);
