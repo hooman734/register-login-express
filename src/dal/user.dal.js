@@ -57,5 +57,5 @@ export const init = (sequelize) => {
   User.init({
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-  }, { sequelize, modelName: 'user' });
+  }, { sequelize, modelName: 'user', unique: true });
 };
