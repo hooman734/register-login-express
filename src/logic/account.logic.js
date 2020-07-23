@@ -15,6 +15,8 @@ export class AccountLogic {
   }
 
   async login(email, password) {
+    // TODO: Validate email and password are not empty
+
     const result = await findUser(this.sequelize, {
       email,
       password: hashPassword(password),
@@ -27,6 +29,8 @@ export class AccountLogic {
   }
 
   async register(email, password) {
+    // TODO: Validate email and password are not empty
+
     const emailAlreadyExist = await existUserWithEmail(this.sequelize, email);
 
     if (!emailAlreadyExist) {
