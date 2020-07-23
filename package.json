@@ -9,7 +9,7 @@
     "build": "rm -rf build || true && mkdir -p build && cp -r src/* build && babel src --out-dir build",
     "dev": "cd src && NODE_ENV=development nodemon --exec babel-node index.js",
     "lint:fix": "eslint './src/**/*.js'",
-    "postinstall": "npm run build && node build/index.js"
+    "postinstall": "npm run build"
   },
   "keywords": [
     "express",
