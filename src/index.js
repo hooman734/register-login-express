@@ -19,6 +19,8 @@ const SequelizeStore = connectSessionSequelize(session.Store);
 // create db
 let sequelize;
 
+logger.debug(`Environment: ${process.env.NODE_ENV}`);
+
 if (process.env.NODE_ENV === 'development') {
   sequelize = new Sequelize('Info', 'root', 'password', {
     dialect: 'sqlite',
