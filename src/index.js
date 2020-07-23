@@ -120,4 +120,4 @@ app.get('/welcome', [ensureLoggedIn], (req, res) => {
 });
 
 // listening the port
-app.listen(port, () => console.log(`Serving on http://localhost:${port}`));
+app.listen(port, () => logger.debug(`Serving on http://localhost:${port}`));
