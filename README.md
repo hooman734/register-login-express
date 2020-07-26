@@ -5,6 +5,17 @@ Register a user then login using cookie, session, and database.
 
 ---
 
+## Screnshots
+
+![home](screenshots/home.png)
+
+![login](screenshots/login.png)
+
+![register](screenshots/register.png)
+
+
+---
+
 Load `.env` file:
 ```
 export $(grep -v '^#' .env | xargs)
