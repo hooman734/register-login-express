@@ -1,4 +1,4 @@
-# rgister-login-express
+# register-login-express
 Register a user then login using cookie, session, and database.
 
 [Website](https://register-login-express.herokuapp.com/)
